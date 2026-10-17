@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracking Pengiriman - SITTA UT</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body class="dashboard-page tracking-page">
+    <header class="dashboard-header">
+      <div class="dashboard-brand">
+        <img
+          src="assets/ut.png"
+          alt="Logo Universitas Terbuka"
+          class="ut-logo"
+        />
+        <div>
+          <h1>SITTA UT</h1>
+          <p>Sistem Informasi Bahan Ajar Universitas Terbuka</p>
+        </div>
+      </div>
+
+      <a href="dashboard.html" class="back-link"> Kembali ke Dashboard </a>
+    </header>
+
+    <main class="dashboard-container tracking-container">
+      <section class="welcome-section">
+        <h2>Tracking Pengiriman</h2>
+        <p>
+          Periksa status pengiriman bahan ajar berdasarkan Nomor Delivery Order.
+        </p>
+      </section>
+
+      <!-- Form pencarian -->
+      <section class="stok-section tracking-search">
+        <h3>Cari Delivery Order</h3>
+
+        <form id="trackingForm" class="tracking-form">
+          <div class="form-group">
+            <label for="nomorDO">Nomor Delivery Order (DO)</label>
+            <input
+              type="text"
+              id="nomorDO"
+              name="nomorDO"
+              placeholder="Contoh: 2023005678"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <button type="submit">Cari</button>
+        </form>
+
+        <p id="pesanTracking" role="status" hidden></p>
+      </section>
+
+      <!-- Hasil pencarian -->
+      <section id="hasilTracking" class="stok-section tracking-results" hidden>
+        <!-- Status pengiriman -->
+        <div class="status-pengiriman">
+          <h3>Status Pengiriman</h3>
+
+          <div
+            id="statusProgress"
+            class="status-progress"
+            role="img"
+            aria-label="Tahapan status pengiriman"
+          >
+            <div class="status-progress-line">
+              <div id="statusProgressFill" class="status-progress-fill"></div>
+            </div>
+
+            <div class="status-step" data-step="0">
+              <span class="status-dot"></span>
+              <span class="status-label">Diterima</span>
+            </div>
+
+            <div class="status-step" data-step="1">
+              <span class="status-dot"></span>
+              <span class="status-label">Dalam Pengiriman</span>
+            </div>
+
+            <div class="status-step" data-step="2">
+              <span class="status-dot"></span>
+              <span class="status-label">Dikirim</span>
+            </div>
+
+            <div class="status-step" data-step="3">
+              <span class="status-dot"></span>
+              <span class="status-label">Selesai</span>
+            </div>
+          </div>
+
+          <p id="statusAktual" class="status-aktual"></p>
+        </div>
+
+        <!-- Informasi pengiriman -->
+        <div class="informasi-pengiriman">
+          <h3>Informasi Pengiriman</h3>
+
+          <div class="table-wrapper">
+            <table id="tabelTracking">
+              <tbody>
+                <tr>
+                  <th scope="row">Nomor DO</th>
+                  <td id="hasilNomorDO"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Nama Mahasiswa</th>
+                  <td id="hasilNama"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Status Pengiriman</th>
+                  <td id="hasilStatus"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Ekspedisi</th>
+                  <td id="hasilEkspedisi"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Tanggal Kirim</th>
+                  <td id="hasilTanggalKirim"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Kode Paket</th>
+                  <td id="hasilPaket"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Total Pembayaran</th>
+                  <td id="hasilTotal"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Riwayat perjalanan berbentuk timeline -->
+        <div class="riwayat-perjalanan">
+          <h3>Riwayat Perjalanan</h3>
+
+          <div
+            id="daftarPerjalanan"
+            class="timeline-perjalanan"
+            aria-label="Daftar riwayat perjalanan"
+          >
+            <!-- Riwayat diisi melalui JavaScript -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

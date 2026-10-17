@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - SITTA UT</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body class="dashboard-page">
+    <!-- Bagian header -->
+    <header class="dashboard-header">
+      <div class="dashboard-brand">
+        <!-- Logo UT -->
+        <img
+          src="assets/ut.png"
+          alt="Logo Universitas Terbuka"
+          class="ut-logo"
+        />
+
+        <div>
+          <h1>SITTA UT</h1>
+          <p>Sistem Informasi Bahan Ajar Universitas Terbuka</p>
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <button type="button" id="logoutBtn">Logout</button>
+    </header>
+
+    <!-- Sapaan pengguna login -->
+    <main class="dashboard-container">
+      <!-- Sapaan pengguna -->
+      <section class="welcome-section">
+        <h2 id="greeting">Selamat datang!</h2>
+        <p id="userName">Pengguna SITTA UT</p>
+      </section>
+
+      <!-- Navigasi dashboard -->
+      <section class="dashboard-menu">
+        <!-- Stok Bahan Ajar -->
+        <a href="stok.html" class="menu-card" data-menu="stok">
+          <h3>Informasi Bahan Ajar</h3>
+          <p>Lihat informasi dan stok bahan ajar.</p>
+        </a>
+
+        <!-- Tracking Bahan Ajar -->
+        <a href="tracking.html" class="menu-card" data-menu="tracking">
+          <h3>Tracking Pengiriman</h3>
+          <p>Periksa status pengiriman bahan ajar.</p>
+        </a>
+
+        <!-- Laporan Bahan Ajar dengan sub menu -->
+        <div class="menu-card laporan-card">
+          <h3>Laporan</h3>
+
+          <button
+            type="button"
+            id="laporanToggle"
+            class="laporan-toggle"
+            aria-label="Buka submenu laporan"
+            aria-expanded="false"
+            aria-controls="laporanSubmenu"
+          >
+            <span>Lihat pilihan laporan</span>
+            <span class="laporan-panah" aria-hidden="true">⌄</span>
+          </button>
+
+          <!-- Sub Menu Laporan -->
+          <div id="laporanSubmenu" class="laporan-submenu" hidden>
+            <p>Monitoring Progress DO Bahan Ajar</p>
+            <p>Rekap Bahan Ajar</p>
+          </div>
+        </div>
+
+        <!-- Transaksi Bahan Ajar -->
+        <a href="#" class="menu-card" data-menu="histori">
+          <h3>Histori Transaksi Bahan Ajar</h3>
+          <p>Lihat histori transaksi bahan ajar.</p>
+        </a>
+      </section>
+    </main>
+
+    <!-- Data dan JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

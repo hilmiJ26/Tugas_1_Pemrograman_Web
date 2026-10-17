@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - SITTA Universitas Terbuka</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="login-page">
+    <main class="login-card">
+      <div class="login-heading">
+        <h1>Selamat Datang</h1>
+        <p>Silahkan masuk dengan akun SITTA Anda</p>
+      </div>
+
+      <!-- Menampilkan kesalahan jika login gagal -->
+      <div id="errorAlert" class="alert-error" role="alert" hidden></div>
+
+      <!-- Form untuk memasukkan email dan password -->
+      <form id="loginForm">
+        <!-- Input alamat Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Contoh: rina@ut.ac.id"
+            required
+          />
+        </div>
+
+        <!-- Input password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Masukkan password"
+            required
+          />
+        </div>
+
+        <!-- Login -->
+        <button type="submit">Login</button>
+      </form>
+
+      <!-- Lupa Password dan Registrasi -->
+      <div class="login-links">
+        <a href="#" id="forgotBtn">Lupa Password</a>
+        <a href="#" id="registerBtn">Daftar</a>
+      </div>
+
+      <!-- <p class="demo-account">
+        <strong>Akun untuk pengujian</strong><br />
+        Email: rina@ut.ac.id<br />
+        Password: rina123
+      </p> -->
+    </main>
+
+    <!-- Notifikasi Lupa Password dan Registrasi -->
+    <div id="infoModal" class="modal" hidden>
+      <div class="modal-content">
+        <button
+          type="button"
+          id="closeModal"
+          class="close-btn"
+          aria-label="Tutup"
+        >
+          &times;
+        </button>
+        <h2 id="modalTitle">Informasi</h2>
+        <p id="modalMessage"></p>
+      </div>
+    </div>
+
+    <!-- Muat data dummy data.js aplikasi -->
+    <script src="js/data.js"></script>
+    <!-- Kemudian jalankan logika, modal, interaksi halaman script.js aplikasi -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
