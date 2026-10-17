@@ -1,0 +1,830 @@
+:root {
+  --primary-color: #003366;
+  --secondary-color: #ffcc00;
+  --light-bg: #f4f7f6;
+  --text-color: #333333;
+  --white: #ffffff;
+  --danger: #dc3545;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: var(--light-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: var(--white);
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login-heading {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.login-heading h1 {
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.login-heading p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: 2px solid #8bb6df;
+  border-color: var(--primary-color);
+}
+
+button {
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 11px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #002244;
+}
+
+#loginForm button {
+  width: 100%;
+}
+
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.login-links a {
+  color: var(--primary-color);
+}
+
+.demo-account {
+  background: #f1f5f9;
+  padding: 12px;
+  margin-top: 24px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.modal-content p {
+  margin-top: 12px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  color: #333;
+  font-size: 1.6rem;
+  padding: 2px 8px;
+}
+
+.close-btn:hover {
+  background: #eee;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 22px;
+  }
+}
+
+/* Dashboard SITTA UT */
+.dashboard-page {
+  margin: 0;
+  min-height: 100vh;
+  background: #f2f5fa;
+  color: #243247;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 6%;
+  background: #164e8a;
+  color: white;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 6px;
+}
+
+.dashboard-header p {
+  margin: 0;
+}
+
+.dashboard-header button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: white;
+  color: #164e8a;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dashboard-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.welcome-section {
+  margin-bottom: 25px;
+}
+
+.dashboard-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.menu-card {
+  display: block;
+  padding: 22px;
+  border-radius: 12px;
+  background: white;
+  color: #243247;
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.menu-card h3 {
+  margin-top: 0;
+  color: #164e8a;
+}
+
+.menu-card:hover {
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
+}
+
+.menu-card p a {
+  color: #164e8a;
+}
+
+.dashboard-content {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 12px;
+  background: white;
+}
+
+@media (max-width: 600px) {
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Logo Universitas Terbuka pada dashboard */
+.dashboard-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ut-logo {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: white;
+  border-radius: 5px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .ut-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .dashboard-brand {
+    gap: 10px;
+  }
+}
+
+/* ===== KARTU LAPORAN ===== */
+.laporan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.laporan-card h3 {
+  margin: 0;
+  color: #174f8f;
+}
+
+/* Tombol pilihan laporan */
+.laporan-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d9e4f2;
+  border-radius: 8px;
+  background: #f3f7fc;
+  color: #174f8f;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.laporan-toggle:hover {
+  background: #e5eef9;
+}
+
+/* Ikon panah */
+.laporan-panah {
+  margin-left: 8px;
+  font-size: 17px;
+  flex-shrink: 0;
+  display: inline-block;
+  transform: translateY(-4px);
+}
+
+/* Daftar submenu laporan */
+.laporan-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.laporan-submenu p {
+  margin: 0;
+  padding: 10px;
+  border-left: 3px solid #1b548f;
+  border-radius: 4px;
+  background: #f5f7fa;
+  color: #263b53;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Sembunyikan submenu saat tertutup */
+.laporan-submenu[hidden] {
+  display: none;
+}
+
+/* HALAMAN INFORMASI BAHAN AJAR */
+.back-link {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #174f8f;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.back-link:hover {
+  background: #e5eef9;
+}
+
+.stok-section {
+  margin-top: 24px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(20, 55, 90, 0.08);
+}
+
+.stok-section h3 {
+  margin: 0 0 18px;
+  color: #174f8f;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#tabelBahanAjar {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+#tabelBahanAjar th,
+#tabelBahanAjar td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e7ef;
+  font-size: 14px;
+}
+
+#tabelBahanAjar th {
+  background: #174f8f;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+#tabelBahanAjar tbody tr:hover {
+  background: #f3f7fc;
+}
+
+/* COVER BUKU BAHAN AJAR */
+#tabelBahanAjar th:first-child,
+#tabelBahanAjar td:first-child {
+  width: 100px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.cover-buku {
+  display: block;
+  width: 70px;
+  height: 95px;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #f3f6fa;
+}
+
+/* Input untuk memilih gambar cover buku */
+.stok-form input[type="file"] {
+  height: auto;
+  padding: 9px;
+  background: #fff;
+  font-size: 13px;
+}
+
+/* Pratinjau cover buku yang dipilih */
+.cover-buku-preview {
+  display: block;
+  width: 100px;
+  height: 135px;
+  margin-top: 8px;
+  border: 1px solid #dce5ef;
+  border-radius: 6px;
+  background: #f3f6fa;
+  object-fit: contain;
+}
+
+/* Sembunyikan pratinjau sebelum gambar dipilih */
+.cover-buku-preview[hidden] {
+  display: none;
+}
+
+.stok-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stok-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.stok-form label {
+  color: #263b53;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stok-form input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #cbd7e5;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.stok-form input:focus {
+  outline: 2px solid #b7d4f7;
+  border-color: #174f8f;
+}
+
+.stok-form button {
+  grid-column: 1 / -1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #174f8f;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stok-form button:hover {
+  background: #103d70;
+}
+
+#pesanStok {
+  margin: 16px 0 0;
+  color: #17663a;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .stok-section {
+    padding: 16px;
+  }
+
+  .stok-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* HALAMAN TRACKING PENGIRIMAN */
+.tracking-container {
+  max-width: 1060px;
+}
+
+.tracking-search {
+  margin-top: 24px;
+}
+
+.tracking-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
+  align-items: end;
+  gap: 14px;
+}
+
+.tracking-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.tracking-form label {
+  color: #263b53;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tracking-form input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+  padding: 0 14px;
+  border: 1px solid #cbd7e5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #263b53;
+  font: inherit;
+}
+
+.tracking-form input:focus {
+  outline: 2px solid #b7d4f7;
+  border-color: #174f8f;
+}
+
+.tracking-form button {
+  width: 100px;
+  height: 46px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: #174f8f;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.tracking-form button:hover {
+  background: #103d70;
+}
+
+.tracking-form button:focus-visible,
+.back-link:focus-visible {
+  outline: 3px solid #8dbfff;
+  outline-offset: 3px;
+}
+
+#pesanTracking {
+  margin: 14px 0 0;
+  color: #b42318;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.tracking-results {
+  margin-top: 24px;
+}
+
+.tracking-results h3 {
+  margin: 0 0 18px;
+  color: #174f8f;
+  font-size: 18px;
+}
+
+/* Status pengiriman */
+.status-pengiriman {
+  margin-bottom: 32px;
+  padding: 22px;
+  border: 1px solid #e1e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.status-progress {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 28px 8px 0;
+}
+
+.status-progress-line {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  left: 0;
+  height: 4px;
+  border-radius: 4px;
+  background: #e5eaf0;
+}
+
+.status-progress-fill {
+  width: 0;
+  height: 100%;
+  border-radius: 4px;
+  background: #1479f8;
+  transition: width 0.3s ease;
+}
+
+.status-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  text-align: center;
+}
+
+.status-dot {
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 3px solid #e5eaf0;
+  border-radius: 50%;
+  background: #e5eaf0;
+}
+
+.status-step.completed .status-dot {
+  border-color: #1479f8;
+  background: #1479f8;
+}
+
+.status-step.active .status-dot {
+  border-color: #1479f8;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px #dcecff;
+}
+
+.status-label {
+  color: #65758b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.status-step.completed .status-label {
+  color: #174f8f;
+}
+
+.status-step.active .status-label {
+  color: #1479f8;
+  font-weight: 700;
+}
+
+.status-aktual {
+  margin: 22px 0 0;
+  color: #174f8f;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Tabel informasi */
+.informasi-pengiriman {
+  margin-top: 30px;
+}
+
+#tabelTracking {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+#tabelTracking th,
+#tabelTracking td {
+  padding: 13px 16px;
+  border-bottom: 1px solid #dce5ef;
+  text-align: left;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#tabelTracking th {
+  width: 32%;
+  background: #f0f5fb;
+  color: #174f8f;
+  font-weight: 600;
+}
+
+#tabelTracking td {
+  color: #263b53;
+}
+
+/* Timeline riwayat perjalanan */
+.riwayat-perjalanan {
+  margin-top: 32px;
+}
+
+.timeline-perjalanan {
+  position: relative;
+  margin: 8px 0 0 8px;
+  padding: 0 0 0 28px;
+}
+
+.timeline-perjalanan::before {
+  position: absolute;
+  top: 8px;
+  bottom: 12px;
+  left: 4px;
+  width: 2px;
+  background: #1680ff;
+  content: "";
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 25px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 4px;
+}
+
+.timeline-item::before {
+  position: absolute;
+  top: 4px;
+  left: -29px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #1680ff;
+  border-radius: 50%;
+  background: #ffffff;
+  content: "";
+}
+
+.timeline-waktu {
+  margin-bottom: 5px;
+  color: #56708f;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.timeline-keterangan {
+  color: #263b53;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .tracking-form {
+    grid-template-columns: minmax(0, 1fr) 82px;
+    gap: 8px;
+  }
+
+  .tracking-form button {
+    padding: 0 10px;
+  }
+
+  .status-pengiriman {
+    padding: 16px 10px;
+  }
+
+  .status-progress {
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+
+  .status-label {
+    font-size: 10px;
+  }
+
+  #tabelTracking th,
+  #tabelTracking td {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  #tabelTracking th {
+    width: 39%;
+  }
+
+  .timeline-keterangan {
+    font-size: 13px;
+  }
+}
