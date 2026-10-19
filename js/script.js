@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const previewCover = document.getElementById("previewCover");
 
   if (daftarBahanAjar && formBahanAjar) {
-    // Menampilkan data bahan ajar
+    // Fungsi untuk menampilkan data bahan ajar ke tabel
     function tampilkanBahanAjar(bahan) {
       const baris = document.createElement("tr");
 
@@ -253,9 +253,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Menampilkan data awal dari data.js
-    dataBahanAjar.forEach(function (bahan) {
-      tampilkanBahanAjar(bahan);
-    });
+    if (typeof dataBahanAjar !== "undefined" && Array.isArray(dataBahanAjar)) {
+      dataBahanAjar.forEach(function (bahan) {
+        tampilkanBahanAjar(bahan);
+      });
+    }
 
     // Pratinjau cover ketika pengguna memilih gambar
     if (inputCover && previewCover) {
@@ -270,14 +272,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (!file.type.startsWith("image/")) {
-          inputCover.setCustomValidity("Pilih file gambar yang valid.");
-          inputCover.reportValidity();
+          alert("Pilih file gambar yang valid.");
           inputCover.value = "";
-          inputCover.setCustomValidity("");
           return;
         }
-
-        inputCover.setCustomValidity("");
 
         const reader = new FileReader();
 
@@ -295,10 +293,141 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Menambahkan bahan ajar baru ke tabel
+    // EVENT LISTENER SUBMIT FORM STOK (Hanya 1 fungsi yang bersih)
     formBahanAjar.addEventListener("submit", function (event) {
       event.preventDefault();
 
+      // Reset pesan umum
+      if (pesanStok) {
+        pesanStok.hidden = true;
+        pesanStok.textContent = "";
+        pesanStok.className = "";
+      }
+
+      // Daftar field yang perlu divalidasi
+      const inputs = [
+        {
+          id: "kodeLokasi",
+          errorId: "errorKodeLokasi",
+          label: "Kode Lokasi",
+          type: "text",
+        },
+        {
+          id: "kodeBarang",
+          errorId: "errorKodeBarang",
+          label: "Kode Barang",
+          type: "text",
+        },
+        {
+          id: "namaBarang",
+          errorId: "errorNamaBarang",
+          label: "Nama Barang",
+          type: "text",
+        },
+        {
+          id: "jenisBarang",
+          errorId: "errorJenisBarang",
+          label: "Jenis Barang",
+          type: "select",
+        },
+        {
+          id: "edisi",
+          errorId: "errorEdisi",
+          label: "Edisi",
+          type: "numberMin1",
+        },
+        {
+          id: "stok",
+          errorId: "errorStok",
+          label: "Jumlah Stok",
+          type: "numberMin0",
+        },
+        {
+          id: "coverBuku",
+          errorId: "errorCoverBuku",
+          label: "Cover Buku",
+          type: "file",
+        },
+      ];
+
+      let isValid = true;
+      let firstInvalidInput = null;
+
+      // Cek validasi setiap field
+      inputs.forEach(function (field) {
+        const inputEl = document.getElementById(field.id);
+        const errorEl = document.getElementById(field.errorId);
+
+        // Reset status error per field
+        if (inputEl) inputEl.classList.remove("is-invalid");
+        if (errorEl) {
+          errorEl.textContent = "";
+          errorEl.hidden = true;
+        }
+
+        let isFieldError = false;
+        let customMessage = field.label + " masih kosong/belum ditulis.";
+
+        if (field.type === "select") {
+          if (!inputEl || inputEl.value === "") {
+            isFieldError = true;
+            customMessage = field.label + " belum dipilih.";
+          }
+        } else if (field.type === "numberMin1") {
+          const val = inputEl.value.trim();
+          if (val === "" || Number(val) <= 0 || !Number.isFinite(Number(val))) {
+            isFieldError = true;
+            customMessage =
+              field.label + " masih kosong atau bernilai tidak valid.";
+          }
+        } else if (field.type === "numberMin0") {
+          const val = inputEl.value.trim();
+          if (val === "" || Number(val) < 0 || !Number.isFinite(Number(val))) {
+            isFieldError = true;
+            customMessage =
+              field.label + " masih kosong atau bernilai tidak valid.";
+          }
+        } else if (field.type === "file") {
+          if (!inputEl.files || inputEl.files.length === 0) {
+            isFieldError = true;
+            customMessage = field.label + " belum dipilih.";
+          }
+        } else {
+          if (!inputEl || inputEl.value.trim() === "") {
+            isFieldError = true;
+          }
+        }
+
+        // Jika terdeteksi kosong/salah
+        if (isFieldError) {
+          isValid = false;
+          if (inputEl) inputEl.classList.add("is-invalid");
+
+          if (errorEl) {
+            errorEl.textContent = customMessage;
+            errorEl.hidden = false;
+          }
+
+          if (!firstInvalidInput && inputEl) {
+            firstInvalidInput = inputEl;
+          }
+        }
+      });
+
+      // Jika ada error, hentikan submit & fokus ke input bermasalah pertama
+      if (!isValid) {
+        if (pesanStok) {
+          pesanStok.textContent = "Mohon lengkapi seluruh form dengan benar.";
+          pesanStok.className = "pesan-error";
+          pesanStok.hidden = false;
+        }
+        if (firstInvalidInput) {
+          firstInvalidInput.focus();
+        }
+        return;
+      }
+
+      // Jika semua valid, ambil data dan proses pembacaan file cover
       const bahanBaru = {
         kodeLokasi: document.getElementById("kodeLokasi").value.trim(),
         kodeBarang: document.getElementById("kodeBarang").value.trim(),
@@ -308,169 +437,19 @@ document.addEventListener("DOMContentLoaded", function () {
         stok: Number(document.getElementById("stok").value),
       };
 
-      // Menambahkan bahan ajar baru ke tabel dengan validasi JS kustom
-      formBahanAjar.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        // Reset pesan umum
-        pesanStok.hidden = true;
-        pesanStok.textContent = "";
-        pesanStok.className = "";
-
-        // Daftar field yang perlu divalidasi
-        const inputs = [
-          {
-            id: "kodeLokasi",
-            errorId: "errorKodeLokasi",
-            label: "Kode Lokasi",
-          },
-          {
-            id: "kodeBarang",
-            errorId: "errorKodeBarang",
-            label: "Kode Barang",
-          },
-          {
-            id: "namaBarang",
-            errorId: "errorNamaBarang",
-            label: "Nama Barang",
-          },
-          {
-            id: "jenisBarang",
-            errorId: "errorJenisBarang",
-            label: "Jenis Barang",
-          },
-          { id: "edisi", errorId: "errorEdisi", label: "Edisi" },
-          {
-            id: "stok",
-            errorId: "errorStok",
-            label: "Jumlah Stok",
-            isNumber: true,
-          },
-          {
-            id: "coverBuku",
-            errorId: "errorCoverBuku",
-            label: "Cover Buku",
-            isFile: true,
-          },
-        ];
-
-        let isValid = true;
-        let firstInvalidInput = null;
-
-        // cek validasi setiap field
-        inputs.forEach(function (field) {
-          const inputEl = document.getElementById(field.id);
-          const errorEl = document.getElementById(field.errorId);
-
-          // Reset status error per field
-          if (inputEl) inputEl.classList.remove("is-invalid");
-          if (errorEl) {
-            errorEl.textContent = "";
-            errorEl.hidden = true;
-          }
-
-          let isFieldEmpty = false;
-
-          if (field.isFile) {
-            if (!inputEl.files || inputEl.files.length === 0) {
-              isFieldEmpty = true;
-            }
-          } else if (field.isNumber) {
-            const val = inputEl.value.trim();
-            if (
-              val === "" ||
-              Number(val) < 0 ||
-              !Number.isFinite(Number(val))
-            ) {
-              isFieldEmpty = true;
-            }
-          } else {
-            if (inputEl.value.trim() === "") {
-              isFieldEmpty = true;
-            }
-          }
-
-          // Jika terdeteksi kosong/salah
-          if (isFieldEmpty) {
-            isValid = false;
-            if (inputEl) inputEl.classList.add("is-invalid");
-
-            if (errorEl) {
-              errorEl.textContent =
-                field.label + " masih kosong/belum ditulis.";
-              errorEl.hidden = false;
-            }
-
-            if (!firstInvalidInput && inputEl) {
-              firstInvalidInput = inputEl;
-            }
-          }
-        });
-
-        // Jika ada error, hentikan submit & fokus ke input bermasalah pertama
-        if (!isValid) {
-          if (pesanStok) {
-            pesanStok.textContent =
-              "Mohon lengkapi seluruh form yang masih kosong.";
-            pesanStok.className = "pesan-error";
-            pesanStok.hidden = false;
-          }
-          if (firstInvalidInput) {
-            firstInvalidInput.focus();
-          }
-          return;
-        }
-
-        // Jika semua terisi dengan benar, proses data
-        const bahanBaru = {
-          kodeLokasi: document.getElementById("kodeLokasi").value.trim(),
-          kodeBarang: document.getElementById("kodeBarang").value.trim(),
-          namaBarang: document.getElementById("namaBarang").value.trim(),
-          jenisBarang: document.getElementById("jenisBarang").value.trim(),
-          edisi: document.getElementById("edisi").value.trim(),
-          stok: Number(document.getElementById("stok").value),
-        };
-
-        const file = inputCover.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function () {
-          bahanBaru.cover = reader.result;
-
-          dataBahanAjar.push(bahanBaru);
-          tampilkanBahanAjar(bahanBaru);
-
-          formBahanAjar.reset();
-
-          if (previewCover) {
-            previewCover.hidden = true;
-            previewCover.removeAttribute("src");
-          }
-
-          pesanStok.textContent =
-            "Data bahan ajar dan cover buku berhasil ditambahkan.";
-          pesanStok.className = "pesan-sukses";
-          pesanStok.hidden = false;
-        };
-
-        reader.onerror = function () {
-          pesanStok.textContent =
-            "Gambar gagal dibaca. Silakan pilih gambar lain.";
-          pesanStok.className = "pesan-error";
-          pesanStok.hidden = false;
-        };
-
-        reader.readAsDataURL(file);
-      });
-
       const file = inputCover.files[0];
       const reader = new FileReader();
 
-      // Setelah gambar berhasil dibaca, tambahkan data ke tabel
       reader.onload = function () {
         bahanBaru.cover = reader.result;
 
-        dataBahanAjar.push(bahanBaru);
+        // Masukkan ke array global jika ada, dan render ke tabel (hanya 1 kali)
+        if (
+          typeof dataBahanAjar !== "undefined" &&
+          Array.isArray(dataBahanAjar)
+        ) {
+          dataBahanAjar.push(bahanBaru);
+        }
         tampilkanBahanAjar(bahanBaru);
 
         formBahanAjar.reset();
@@ -480,15 +459,21 @@ document.addEventListener("DOMContentLoaded", function () {
           previewCover.removeAttribute("src");
         }
 
-        pesanStok.textContent =
-          "Data bahan ajar dan cover buku berhasil ditambahkan.";
-        pesanStok.hidden = false;
+        if (pesanStok) {
+          pesanStok.textContent =
+            "Data bahan ajar dan cover buku berhasil ditambahkan.";
+          pesanStok.className = "pesan-sukses";
+          pesanStok.hidden = false;
+        }
       };
 
       reader.onerror = function () {
-        pesanStok.textContent =
-          "Gambar gagal dibaca. Silakan pilih gambar lain.";
-        pesanStok.hidden = false;
+        if (pesanStok) {
+          pesanStok.textContent =
+            "Gambar gagal dibaca. Silakan pilih gambar lain.";
+          pesanStok.className = "pesan-error";
+          pesanStok.hidden = false;
+        }
       };
 
       reader.readAsDataURL(file);
