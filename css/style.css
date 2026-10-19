@@ -451,7 +451,7 @@ button:hover {
   object-fit: contain;
 }
 
-/* Sembunyikan pratinjau sebelum gambar dipilih */
+/* Menyembunyikan pratinjau sebelum gambar dipilih */
 .cover-buku-preview[hidden] {
   display: none;
 }
@@ -521,7 +521,6 @@ button:hover {
 }
 
 /* VALIDASI FORM ERROR STOK*/
-
 /* Garis tepi input merah saat ada kesalahan input */
 input.is-invalid {
   border-color: #d92d20 !important;
@@ -557,6 +556,27 @@ input.is-invalid {
   background-color: #ecfdf3;
   color: #027a48;
   border: 1px solid #a6f4c5;
+}
+
+/* Styling elemen select */
+.stok-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d9e4f2;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #263b53;
+  box-sizing: border-box;
+}
+
+/* Indikator error pada elemen select*/
+select.is-invalid,
+input.is-invalid {
+  border-color: #d92d20 !important;
+  background-color: #fef3f2 !important;
+  outline: 2px solid #fee4e2 !important;
 }
 
 /* HALAMAN TRACKING PENGIRIMAN */
