@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informasi Bahan Ajar - SITTA UT</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="dashboard-page">
+    <!-- Bagian Header -->
+    <header class="dashboard-header">
+      <div class="dashboard-brand">
+        <!-- Logo UT -->
+        <img
+          src="assets/ut.png"
+          alt="Logo Universitas Terbuka"
+          class="ut-logo"
+        />
+        <div>
+          <h1>SITTA UT</h1>
+          <p>Sistem Informasi Bahan Ajar Universitas Terbuka</p>
+        </div>
+      </div>
+
+      <!-- Kembali ke halaman Dashboard -->
+      <a href="dashboard.html" class="back-link">Kembali ke Dashboard</a>
+    </header>
+
+    <!-- Informasi Bahan Ajar -->
+    <main class="dashboard-container">
+      <section class="welcome-section">
+        <h2>Informasi Bahan Ajar</h2>
+        <p>Daftar informasi dan stok bahan ajar Universitas Terbuka.</p>
+      </section>
+
+      <section class="stok-section">
+        <h3>Daftar Stok Bahan Ajar</h3>
+
+        <div class="table-wrapper">
+          <table id="tabelBahanAjar">
+            <thead>
+              <tr>
+                <th>Cover Buku</th>
+                <th>Kode Lokasi</th>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Jenis Barang</th>
+                <th>Edisi</th>
+                <th>Stok</th>
+              </tr>
+            </thead>
+            <tbody id="daftarBahanAjar">
+              <!-- Data ditampilkan melalui JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="stok-section">
+        <h3>Tambah Data Stok</h3>
+
+        <form id="formBahanAjar" class="stok-form">
+          <div class="form-group">
+            <label for="kodeLokasi">Kode Lokasi</label>
+            <input type="text" id="kodeLokasi" name="kodeLokasi" />
+            <small id="errorKodeLokasi" class="error-text" hidden></small>
+          </div>
+
+          <div class="form-group">
+            <label for="kodeBarang">Kode Barang</label>
+            <input type="text" id="kodeBarang" name="kodeBarang" />
+            <small id="errorKodeBarang" class="error-text" hidden></small>
+          </div>
+
+          <div class="form-group">
+            <label for="namaBarang">Nama Barang</label>
+            <input type="text" id="namaBarang" name="namaBarang" />
+            <small id="errorNamaBarang" class="error-text" hidden></small>
+          </div>
+
+          <div class="form-group">
+            <label for="jenisBarang">Jenis Barang</label>
+            <input type="text" id="jenisBarang" name="jenisBarang" />
+            <small id="errorJenisBarang" class="error-text" hidden></small>
+          </div>
+
+          <div class="form-group">
+            <label for="edisi">Edisi</label>
+            <input type="text" id="edisi" name="edisi" />
+            <small id="errorEdisi" class="error-text" hidden></small>
+          </div>
+
+          <div class="form-group">
+            <label for="stok">Jumlah Stok</label>
+            <input type="number" id="stok" name="stok" min="0" />
+            <small id="errorStok" class="error-text" hidden></small>
+          </div>
+
+          <div class="form-group">
+            <label for="coverBuku">Cover Buku</label>
+            <input
+              type="file"
+              id="coverBuku"
+              name="coverBuku"
+              accept="image/*"
+            />
+            <small id="errorCoverBuku" class="error-text" hidden></small>
+
+            <img
+              id="previewCover"
+              class="cover-buku-preview"
+              alt="Pratinjau cover buku"
+              hidden
+            />
+          </div>
+
+          <button type="submit">Tambah Bahan Ajar</button>
+        </form>
+
+        <p id="pesanStok" role="status" hidden></p>
+      </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
