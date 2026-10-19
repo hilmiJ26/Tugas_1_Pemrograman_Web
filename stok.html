@@ -80,19 +80,34 @@
 
           <div class="form-group">
             <label for="jenisBarang">Jenis Barang</label>
-            <input type="text" id="jenisBarang" name="jenisBarang" />
+            <select name="jenisBarang" id="jenisBarang">
+              <option value="BMP">BMP</option>
+              <option value="Non-BMP">Non-BMP</option>
+            </select>
             <small id="errorJenisBarang" class="error-text" hidden></small>
           </div>
 
           <div class="form-group">
             <label for="edisi">Edisi</label>
-            <input type="text" id="edisi" name="edisi" />
+            <input
+              type="number"
+              id="edisi"
+              min="1"
+              placeholder="Contoh: 1"
+              name="edisi"
+            />
             <small id="errorEdisi" class="error-text" hidden></small>
           </div>
 
           <div class="form-group">
             <label for="stok">Jumlah Stok</label>
-            <input type="number" id="stok" name="stok" min="0" />
+            <input
+              type="number"
+              id="stok"
+              name="stok"
+              min="0"
+              placeholder="Contoh: 100"
+            />
             <small id="errorStok" class="error-text" hidden></small>
           </div>
 
